@@ -1,0 +1,5 @@
+Library for Bricklink database
+
+Uses local database, filled with public-available data from Bricklink.
+
+It depends on DBConnector
