@@ -171,7 +171,7 @@ public class BricklinkCategory {
 	
 	
 	
-	// BK query functions
+	// query functions
 	
 	/**
 	 * returns category name by id
