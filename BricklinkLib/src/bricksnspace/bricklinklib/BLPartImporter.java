@@ -28,6 +28,8 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.LineNumberReader;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.SwingWorker;
 import javax.xml.stream.XMLEventReader;
@@ -137,7 +139,7 @@ public class BLPartImporter extends SwingWorker<Integer, Void> {
 							bp.insert();
 						}
 						else {
-							System.out.println("Duplicated part: "+bp.blid+" - "+bp.name);
+							Logger.getGlobal().log(Level.WARNING,"Duplicated part: "+bp.blid+" - "+bp.name);
 						}
 						i++;
 						setProgress((i*100)/lineNo);

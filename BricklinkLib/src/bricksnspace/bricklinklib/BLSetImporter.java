@@ -22,6 +22,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.LineNumberReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.SwingWorker;
 import javax.xml.stream.XMLEventReader;
@@ -133,7 +135,7 @@ public class BLSetImporter extends SwingWorker<Integer, Void> {
 				}
 				break;
 			case XMLEvent.ENTITY_REFERENCE:
-				System.out.println(e.asCharacters());
+				Logger.getGlobal().log(Level.INFO,e.asCharacters().toString());
 				break;
 			case XMLEvent.CHARACTERS:
 				ch = e.asCharacters();
