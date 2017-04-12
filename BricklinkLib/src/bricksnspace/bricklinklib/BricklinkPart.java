@@ -1,5 +1,5 @@
 /**
-	Copyright 2016 Mario Pascucci <mpascucci@gmail.com>
+	Copyright 2016-2017 Mario Pascucci <mpascucci@gmail.com>
 	This file is part of BricklinkLib
 
 	BricklinkLib is free software: you can redistribute it and/or modify
@@ -323,12 +323,12 @@ public class BricklinkPart {
 	
 	/**
 	 * Retrieve a part using Bricklink part id<br>
-	 * May return more than one part, because there can be duplicates (it is an error)
+	 * Returns one part, if duplicates found, throw an exception (it is an error)
 	 * @param blid Bricklink ID to retrieve
-	 * @return
-	 * @throws SQLException
+	 * @return part or null if no part found
+	 * @throws SQLException if there is a duplicate part definition
 	 */
-	public static ArrayList<BricklinkPart> getById(String blid) throws SQLException {
+	public static BricklinkPart getById(String blid) throws SQLException {
 		
 		PreparedStatement ps;
 		
@@ -337,7 +337,9 @@ public class BricklinkPart {
 		ArrayList<BricklinkPart> parts = getPS(ps);
 		if (parts.size() > 1) 
 			throw new SQLException("[BricklinkPart] Duplicated part definition in '"+table+"' table: "+blid);
-		return parts;
+		if (parts.size() == 0)
+			return null;
+		return parts.get(0);
 	}
 	
 

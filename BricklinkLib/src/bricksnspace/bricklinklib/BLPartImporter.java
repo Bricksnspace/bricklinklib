@@ -1,5 +1,5 @@
 /**
-	Copyright 2016 Mario Pascucci <mpascucci@gmail.com>
+	Copyright 2016-2017 Mario Pascucci <mpascucci@gmail.com>
 	This file is part of BricklinkLib
 
 	BricklinkLib is free software: you can redistribute it and/or modify
@@ -27,10 +27,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.LineNumberReader;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.swing.SwingWorker;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
@@ -130,16 +126,13 @@ public class BLPartImporter extends SwingWorker<Integer, Void> {
 					// end of xxx.
 					//////////////////////////////////////////////////
 					if (itemType.equals("P")) {
-						ArrayList<BricklinkPart> dbbp = BricklinkPart.getById(bp.blid);
-						if (dbbp.size() == 1) {
-							bp.id = dbbp.get(0).id;
+						BricklinkPart dbbp = BricklinkPart.getById(bp.blid);
+						if (dbbp != null) {
+							bp.id = dbbp.id;
 							bp.update();
 						}
-						else if (dbbp.size() == 0) {
-							bp.insert();
-						}
 						else {
-							Logger.getGlobal().log(Level.WARNING,"Duplicated part: "+bp.blid+" - "+bp.name);
+							bp.insert();
 						}
 						i++;
 						setProgress((i*100)/lineNo);

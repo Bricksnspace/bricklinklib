@@ -1,0 +1,4 @@
+2017-04-12  Mario Pascucci  <mpascucci@gmail.com>
+
+	* src/bricksnspace/bricklinklib/BricklinkPart.java (getById): returns only one part, not an array
+	* src/bricksnspace/bricklinklib/BLPartImporter.java (doInBackground): removed redundant duplicate part check
